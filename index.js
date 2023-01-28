@@ -28,8 +28,11 @@ app.post("/message", async (req, res) => {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${message}`,
-      max_tokens: 100,
-      temperature: 0.5,
+      temperature: 1,
+      max_tokens: 3000,
+      top_p: 1,
+      frequency_penalty: 0.5,
+      presence_penalty: 0,
     });
     res.status(200).send({
       message: response.data.choices[0].text,
@@ -47,12 +50,6 @@ app.listen(PORT, () => {
 });
 
 /*
-model: "text-davinci-003",
-      prompt: `${message}`,
-      temperature: 1,
-      max_tokens: 3000,
-      top_p: 1,
-      frequency_penalty: 0.5,
-      presence_penalty: 0,
+
 
 */
